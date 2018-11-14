@@ -406,7 +406,7 @@ class WorkerBridge(worker_interface.WorkerBridge):
             header_hash = self.node.net.PARENT.BLOCKHASH_FUNC(dash_data.block_header_type.pack(header))
             pow_hash = self.node.net.PARENT.POW_FUNC(dash_data.block_header_type.pack(header))
             try:
-                if pow_hash <= header['bits'].target or p2pool.DEBUG:
+                if pow_hash <= header['bits'].target:
                     helper.submit_block(dict(header=header, txs=[new_gentx] + other_transactions), False, self.node.factory, self.node.dashd, self.node.dashd_work, self.node.net)
                     if pow_hash <= header['bits'].target:
                         print

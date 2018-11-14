@@ -333,7 +333,11 @@ class Share(object):
         return 'Share' + repr((self.net, self.peer_addr, self.contents))
     
     def as_share(self):
-        return dict(type=self.VERSION, contents=self.share_type.pack(self.contents))
+        try:
+            return dict(type=self.VERSION, contents=self.share_type.pack(self.contents))
+        except:
+            log.err()
+            raise
     
     def iter_transaction_hash_refs(self):
         return zip(self.share_info['transaction_hash_refs'][::2], self.share_info['transaction_hash_refs'][1::2])
